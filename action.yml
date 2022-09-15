@@ -7,6 +7,9 @@ inputs:
   name:  
     description: Name of file after downloading to temp directory.
     required: true
+  token:
+    description: The token to use to query the Github API. Provided by the Actions context usually. 
+    required: true
 outputs:  
   path:
     description: The file locally after downloading.
@@ -21,7 +24,7 @@ runs:
       run: |
         $Url = "${{ github.api_url }}/repos/${{ github.repository }}/contents/${{ inputs.path }}?ref=${{ github.ref_name }}"
         $Headers = @{
-            'authorization' = 'Bearer ${{ secrets.GITHUB_TOKEN }}'
+            'authorization' = 'Bearer ${{ inputs.token }}'
         }
         $Response = Invoke-RestMethod $Url -Headers $Headers
 
