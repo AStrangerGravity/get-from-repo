@@ -30,6 +30,6 @@ runs:
 
         # Decode from Base64, Parse Yaml
         $Text = $Response.content | %{ [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($_)) } 
-        $Path = "${{ runner.temp }}/${{ inputs.name }}
+        $Path = "${{ runner.temp }}/${{ inputs.name }}"
         $Text > $Path
         echo "::set-output name=path::$Path"
